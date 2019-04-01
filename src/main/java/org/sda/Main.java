@@ -16,20 +16,20 @@ public class Main {
         userList.add(ralph);
         userList.add(dexter);
 
-        Menu menu = new Menu();
+        Menu menu = new Menu(userList);
 
         if (args.length == 0) {
-            menu.view1(userList);
+            menu.view1();
         } else if (args.length == 2) {
             for (User user : userList) {
                 if (user.getName().equals(args[0])) {
                     for (char[] password : user.getPasswords()) {
                         if (new String(password).equals(args[1])) {
-                            menu.view2(user, userList);
+                            menu.view2(user);
                         }
                     }
                 } else {
-                    menu.view3(userList);
+                    menu.view3();
                 }
             }
         } else {

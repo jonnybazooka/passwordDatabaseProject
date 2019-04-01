@@ -1,13 +1,24 @@
 package org.sda;
 
+import org.sda.validation.Validators;
+
 import java.io.Console;
 import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
 
-    public void view1(List<User> users) {
-        char[] password;
+    private char[] password;
+    private List<User> users;
+    private boolean isClosed;
+
+    public Menu(List<User> users) {
+        this.password = null;
+        this.users = users;
+        this.isClosed = false;
+    }
+
+    public void view1() {
         Console console = System.console();
         System.out.println("==============================");
         System.out.println("|    Enter user name:     ");
@@ -21,21 +32,21 @@ public class Menu {
             if (user.getName().equals(userName)) {
                 for (char[] pass : user.getPasswords()) {
                     if (new String(pass).equals(new String(password))) {
-                        view2(user, users);
+                        view2(user);
                     }
                 }
             } else {
                 System.out.println("User not recognised.");
-                view3(users);
+                view3();
+                isClosed = true;
                 break;
             }
         }
     }
 
-    public void view2(User user, List<User> users) {
+    public void view2(User user) {
 
         Scanner scanner = new Scanner(System.in);
-        boolean isClosed = false;
         while (!isClosed) {
             System.out.println("=======================================");
             System.out.println("|    Hello user " + user.getName() + "                |");
@@ -54,8 +65,8 @@ public class Menu {
                     System.out.println(user.getAddress().toString());
                     break;
                 case 3:
-                    isClosed = true;
-                    view3(users);
+                    isClosed = false;
+                    view3();
                     break;
                 default:
                     System.out.println("Wrong input, try again");
@@ -64,13 +75,12 @@ public class Menu {
         }
     }
 
-    public void view3(List<User> users) {
+    public void view3() {
 
         String name;
         char[] password;
         Scanner scanner = new Scanner(System.in);
         Console console = System.console();
-        boolean isClosed = false;
 
         while (!isClosed) {
             System.out.println("=======================================");
@@ -82,6 +92,7 @@ public class Menu {
             int digit = scanner.nextInt();
             switch (digit) {
                 case 1:
+                    System.out.println(users);
                     scanner.nextLine();
                     System.out.println("Enter user name: ");
                     name = scanner.nextLine();
@@ -90,23 +101,23 @@ public class Menu {
                         if (user.getName().equals(name)) {
                             for (char[] pass : user.getPasswords()) {
                                 if (new String(pass).equals(new String(password))) {
-                                    view2(user, users);
+                                    view2(user);
                                     break;
                                 }
                             }
-                        } else {
-                            System.out.println("User not recognised.");
-                            view3(users);
-                            break;
                         }
                     }
                     break;
                 case 2:
                     scanner.nextLine();
+                    Validators validators = new Validators();
                     System.out.println("Enter new user's name: ");
                     name = scanner.nextLine();
                     password = console.readPassword("Enter new password for user: " + name);
-                    System.out.println("Password taken: " + new String(password));
+                    if (!validators.validatePassword(new String(password))) {
+                        System.out.println("Password must be 3-10 characters long, and contain at least 2 upper case characters.");
+                        break;
+                    }
                     System.out.println("Enter country: ");
                     String country = scanner.nextLine();
                     System.out.println("Enter city: ");
@@ -119,8 +130,8 @@ public class Menu {
                     newUser.addPassword(password);
                     users.add(newUser);
                     System.out.println("User registered successfully.");
-                    isClosed = true;
-                    view2(newUser, users);
+                    view2(newUser);
+                    isClosed = false;
                     break;
                 case 3:
                     users.stream()
