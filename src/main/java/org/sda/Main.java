@@ -1,5 +1,8 @@
 package org.sda;
 
+import org.sda.user.Address;
+import org.sda.user.User;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,25 +19,14 @@ public class Main {
         userList.add(ralph);
         userList.add(dexter);
 
-        Menu menu = new Menu(userList);
-
+        Menu menu;
         if (args.length == 0) {
-            menu.view1();
+            menu = new Menu(userList);
         } else if (args.length == 2) {
-            for (User user : userList) {
-                if (user.getName().equals(args[0])) {
-                    for (char[] password : user.getPasswords()) {
-                        if (new String(password).equals(args[1])) {
-                            menu.view2(user);
-                        }
-                    }
-                } else {
-                    menu.view3();
-                }
-            }
+            menu = new Menu(userList, args[0], args[1]);
         } else {
             throw new IllegalArgumentException();
         }
-
+        menu.menuController();
     }
 }

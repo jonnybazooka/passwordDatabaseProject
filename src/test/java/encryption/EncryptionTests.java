@@ -1,11 +1,13 @@
-import org.junit.jupiter.api.Test;
+package encryption;
+
+import org.junit.Test;
 import org.sda.encryption.*;
 
 import static org.junit.Assert.assertEquals;
 
 public class EncryptionTests {
     @Test
-    void rot13TestEncryption() {
+    public void rot13TestEncryption() {
         char[] text = "redFoxJumps234".toCharArray();
         Encoder encoder = new ROT13();
         char[] output = encoder.encrypt(text);
@@ -14,7 +16,7 @@ public class EncryptionTests {
     }
 
     @Test
-    void rot18TestEncryption() {
+    public void rot18TestEncryption() {
         char[] text = "redFoxJumps234".toCharArray();
         Encoder encoder = new ROT18();
         char[] output = encoder.encrypt(text);
@@ -23,7 +25,7 @@ public class EncryptionTests {
     }
 
     @Test
-    void rot13DecryptionTest() {
+    public void rot13DecryptionTest() {
         char[] text = "erqSbkWhzcf234".toCharArray();
         Encoder encoder = new ROT13();
         char[] output = encoder.decrypt(text);
@@ -32,7 +34,7 @@ public class EncryptionTests {
     }
 
     @Test
-    void rot18DecryptionTest() {
+    public void rot18DecryptionTest() {
         char[] text = "erqSbkWhzcf789".toCharArray();
         Encoder encoder = new ROT18();
         char[] output = encoder.decrypt(text);
@@ -41,7 +43,7 @@ public class EncryptionTests {
     }
 
     @Test
-    void doubleEncryptionTest() {
+    public void doubleEncryptionTest() {
         char[] text = "redFoxJumps234".toCharArray();
         Encoder encoder = new ROT13();
         char[] output = encoder.encrypt(text);
@@ -51,7 +53,7 @@ public class EncryptionTests {
     }
 
     @Test
-    void specialCharactersTest() {
+    public void specialCharactersTest() {
         char[] text = "redFoxJumps</$234".toCharArray();
         Encoder encoder = new ROT13();
         char[] output = encoder.encrypt(text);
@@ -60,7 +62,7 @@ public class EncryptionTests {
     }
 
     @Test
-    void rot47EncryptionTest() {
+    public void rot47EncryptionTest() {
         char[] text = "redFoxJumps234".toCharArray();
         Encoder encoder = new ROT47();
         char[] output = encoder.encrypt(text);
@@ -69,7 +71,7 @@ public class EncryptionTests {
     }
 
     @Test
-    void rot47Decryption() {
+    public void rot47Decryption() {
         char[] text = "C65u@IyF>ADabcoo".toCharArray();
         Encoder encoder = new ROT47();
         char[] output = encoder.encrypt(text);
@@ -78,7 +80,7 @@ public class EncryptionTests {
     }
 
     @Test
-    void customCypherEncryptionTest() {
+    public void customCypherEncryptionTest() {
         char[] text = "Red fox jumpe a lot".toCharArray();
         Encoder encoder = new CustomCypher("passphrase");
         char[] output = encoder.encrypt(text);
@@ -87,7 +89,7 @@ public class EncryptionTests {
     }
 
     @Test
-    void customCypherDecryptionTest() {
+    public void customCypherDecryptionTest() {
         char[] text = "Â×ﾭÖê﾿ÝÝØﾭÑﾸÞç".toCharArray();
         Encoder encoder = new CustomCypher("passphrase");
         char[] output = encoder.decrypt(text);
