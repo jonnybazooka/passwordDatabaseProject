@@ -1,12 +1,12 @@
 package org.sda;
 
+import org.sda.comparators.UserNameAndAdressComparator;
 import org.sda.user.Address;
 import org.sda.user.User;
 import org.sda.validation.Validators;
 
 import java.io.Console;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Menu {
 
@@ -41,6 +41,7 @@ public class Menu {
     }
 
     public void menuController() {
+        Collections.sort(users, new UserNameAndAdressComparator());
         if (isUserLoggedIn) {
             userView();
         } else {
@@ -120,6 +121,7 @@ public class Menu {
                 break;
             case REGISTER_NEW_USER:
                 registerNewUser();
+                Collections.sort(users, new UserNameAndAdressComparator());
                 break;
             case LIST_ALL_USERS:
                 listAllUsers();
@@ -151,6 +153,8 @@ public class Menu {
         String name = scanner.nextLine();
         if (!validators.validateUserName(name)) {
             System.out.println("Name must be 5-15 characters long, and cannot start with a digit.");
+        } else if (getUser(name) != null){
+            System.out.println("User name already taken.");
         } else {
             password = console.readPassword("|    Enter new password for user " + name + " :");
             if (!validators.validatePassword(new String(password))) {

@@ -19,6 +19,22 @@ public class Address {
         this.houseNumber = houseNumber;
     }
 
+    public String getCountry() {
+        return country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public int getHouseNumber() {
+        return houseNumber;
+    }
+
     public void changeAddress() {
         Scanner scanner = new Scanner(System.in);
         boolean isAddressChanged = false;
@@ -38,7 +54,6 @@ public class Address {
                 System.out.println("|    Input mismatch. Try again.");
             }
         }
-
     }
 
     @Override

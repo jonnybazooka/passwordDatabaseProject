@@ -1,5 +1,7 @@
 package org.sda.user;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.sda.validation.Validators;
 
 import java.io.Console;
@@ -7,10 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class User {
+public class User implements Comparable<User>{
+
+    private Logger LOGGER = LogManager.getLogger(User.class);
 
     private Address address;
     private String name;
+    private String scienceDegree;
     private List<char[]> passwords;
 
     public User(Address address, String name) {
@@ -35,6 +40,14 @@ public class User {
         return address;
     }
 
+    public String getScienceDegree() {
+        return scienceDegree;
+    }
+
+    public void setScienceDegree(String scienceDegree) {
+        this.scienceDegree = scienceDegree;
+    }
+
     @Override
     public String toString() {
         return "Name: " + name + "\n" + address.toString();
@@ -48,7 +61,6 @@ public class User {
         return  Objects.equals(name, user.name);
     }
 
-
     public boolean changePassword() {
         Console console = System.console();
         Validators validators = new Validators();
@@ -61,10 +73,22 @@ public class User {
             return true;
         } else if (!validators.validatePassword(password1) || !validators.validatePassword(password2)) {
             System.out.println("Password must be 7-15 characters long, and contain at least 2 upper case characters, and 2 digits.");
+            LOGGER.warn("Failed to enter valid password.");
             return false;
         } else {
             System.out.println("Passwords must match.");
+            LOGGER.warn("Entered passwords didn't match.");
             return false;
+        }
+    }
+
+    @Override
+    public int compareTo(User o) {
+        int result = this.name.compareTo(o.getName());
+        if (result == 0) {
+            return new String(this.passwords.get(0)).compareTo(new String(o.getPasswords().get(0)));
+        } else {
+            return result;
         }
     }
 }
