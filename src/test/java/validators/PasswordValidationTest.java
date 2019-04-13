@@ -1,4 +1,3 @@
-/*
 package validators;
 
 import org.junit.*;
@@ -56,4 +55,3 @@ public class PasswordValidationTest {
         assertFalse("Expected false, password too long", validated);
     }
 }
-*/

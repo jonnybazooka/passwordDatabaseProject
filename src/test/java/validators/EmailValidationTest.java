@@ -8,10 +8,9 @@ import static org.junit.Assert.assertTrue;
 
 public class EmailValidationTest {
 
-    private Validators validators = new Validators();
-
     @Test
     public void emailValidator1() {
+        Validators validators = new Validators();
         String email = "tgieraltowski@gmail.com";
         boolean validated = validators.validateEmail(email);
         assertTrue("Expected true, standard email", validated);
@@ -19,6 +18,7 @@ public class EmailValidationTest {
 
     @Test
     public void emailValidator2() {
+        Validators validators = new Validators();
         String email = "t_gieraltowski@gmail.com";
         boolean validated = validators.validateEmail(email);
         assertFalse("Expected false, illegal character", validated);
@@ -26,6 +26,7 @@ public class EmailValidationTest {
 
     @Test
     public void emailValidator3() {
+        Validators validators = new Validators();
         String email = "tg@gmail.com";
         boolean validated = validators.validateEmail(email);
         assertFalse("Expected false, @ in wrong position", validated);
@@ -33,6 +34,7 @@ public class EmailValidationTest {
 
     @Test
     public void emailValidator4() {
+        Validators validators = new Validators();
         String email = "tgieraltowski@pl";
         boolean validated = validators.validateEmail(email);
         assertFalse("Expected false, @ in wrong position", validated);
@@ -40,6 +42,7 @@ public class EmailValidationTest {
 
     @Test
     public void emailValidator5() {
+        Validators validators = new Validators();
         String email = "tgie@raltowski@gmail.com";
         boolean validated = validators.validateEmail(email);
         assertFalse("Expected false, two @ characters", validated);
@@ -47,6 +50,7 @@ public class EmailValidationTest {
 
     @Test
     public void emailValidator6() {
+        Validators validators = new Validators();
         String email = "tgie..owski@gmail.com";
         boolean validated = validators.validateEmail(email);
         assertFalse("Expected false, two special characters in a row", validated);

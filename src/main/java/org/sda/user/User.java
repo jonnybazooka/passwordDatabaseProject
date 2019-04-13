@@ -1,43 +1,39 @@
 package org.sda.user;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.sda.validation.Validators;
 
 import java.io.Console;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class User implements Comparable<User>{
 
-    private Logger LOGGER = LogManager.getLogger(User.class);
-
     private Address address;
     private String name;
     private String scienceDegree;
-    private List<char[]> passwords;
+    private String email;
+    private String password;
 
-    public User(Address address, String name) {
+    public User(Address address, String name, String email, String password) {
         this.address = address;
         this.name = name;
-        this.passwords = new ArrayList<>();
+        this.email = email;
+        this.password = password;
     }
 
-    public void addPassword(char[] password) {
-        passwords.add(password);
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public String getName() {
         return name;
     }
 
-    public List<char[]> getPasswords() {
-        return passwords;
-    }
-
-    public Address getAddress() {
-        return address;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getScienceDegree() {
@@ -46,6 +42,22 @@ public class User implements Comparable<User>{
 
     public void setScienceDegree(String scienceDegree) {
         this.scienceDegree = scienceDegree;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -68,27 +80,20 @@ public class User implements Comparable<User>{
         String password2 = new String(console.readPassword("Confirm new password: "));
         if (validators.doPasswordsMatch(password1, password2) && validators.validatePassword(password1)
                 && validators.validatePassword(password2)) {
-            passwords.set(0, password1.toCharArray());
+            password = password1;
             System.out.println("Password changed successfully.");
             return true;
         } else if (!validators.validatePassword(password1) || !validators.validatePassword(password2)) {
             System.out.println("Password must be 7-15 characters long, and contain at least 2 upper case characters, and 2 digits.");
-            LOGGER.warn("Failed to enter valid password.");
             return false;
         } else {
             System.out.println("Passwords must match.");
-            LOGGER.warn("Entered passwords didn't match.");
             return false;
         }
     }
 
     @Override
     public int compareTo(User o) {
-        int result = this.name.compareTo(o.getName());
-        if (result == 0) {
-            return new String(this.passwords.get(0)).compareTo(new String(o.getPasswords().get(0)));
-        } else {
-            return result;
-        }
+        return this.name.compareTo(o.getName());
     }
 }
