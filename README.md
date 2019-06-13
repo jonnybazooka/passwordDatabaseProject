@@ -1,0 +1,2 @@
+# Password database
+# This project contains self implemented database for storing user data and user's passwords. Passwords are kept in a hashed format. Master password uses SHA256 algorithm, other passwords are encrypted with self-made algorithms. Console use only.
