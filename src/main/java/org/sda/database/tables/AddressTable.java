@@ -1,24 +1,26 @@
 package org.sda.database.tables;
 
+import org.sda.user.Country;
+
 public class AddressTable {
-    private String country;
+    private Country country;
     private String city;
     private String street;
     private int houseNumber;
 
-    public AddressTable(String country, String city, String street, int houseNumber) {
+    public AddressTable(Country country, String city, String street, int houseNumber) {
         this.country = country;
         this.city = city;
         this.street = street;
         this.houseNumber = houseNumber;
     }
 
-    public String getCountry() {
+    public Country getCountry() {
         return country;
     }
 
     public void setCountry(String country) {
-        this.country = country;
+        this.country = Country.valueOf(country);
     }
 
     public String getCity() {

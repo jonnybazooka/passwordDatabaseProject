@@ -6,10 +6,6 @@ import org.sda.authentication.authService.AuthService;
 import org.sda.authentication.authService.AuthServiceImplementation;
 import org.sda.database.UserService;
 import org.sda.database.UserServiceImplementation;
-import org.sda.user.User;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
     private static final Logger LOGGER = LogManager.getLogger(Main.class.getName());
@@ -18,18 +14,16 @@ public class Main {
 
     public static void main(String[] args) {
 
-        List<User> userList = new ArrayList<>();
-
-
         Menu menu;
         if (args.length == 0) {
-            menu = new Menu(userService, authService, LOGGER);
+            menu = new Menu(userService, authService);
         } else if (args.length == 2) {
-            menu = new Menu(userList, args[0], args[1], userService);
+            menu = new Menu(args[0], args[1], userService, authService);
         } else {
             throw new IllegalArgumentException();
         }
+        LOGGER.debug("App starting.");
         menu.menuController();
-
+        LOGGER.debug("App finishing.");
     }
 }

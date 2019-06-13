@@ -1,16 +1,20 @@
 package org.sda.database.tables;
 
+import org.sda.user.Country;
+
 public class UserTable {
 
+    private int id;
     private String userName;
     private String hash;
-    private String country;
+    private Country country;
     private String city;
     private String street;
     private int houseNumber;
     private String email;
 
-    public UserTable(String userName, String email, String country, String city, String street, int houseNumber, String hash) {
+    public UserTable(int id, String userName, String email, Country country, String city, String street, int houseNumber, String hash) {
+        this.id = id;
         this.userName = userName;
         this.hash = hash;
         this.country = country;
@@ -36,12 +40,8 @@ public class UserTable {
         this.hash = hash;
     }
 
-    public String getCountry() {
+    public Country getCountry() {
         return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
     }
 
     public String getCity() {
@@ -74,5 +74,13 @@ public class UserTable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

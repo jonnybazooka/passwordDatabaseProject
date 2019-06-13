@@ -14,7 +14,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class ComparatorsTests {
-    private List<User> users = new ArrayList<>();
+    /*private List<User> users = new ArrayList<>();
     private List<User> sortedUsers = new ArrayList<>();
 
     @Before
@@ -34,9 +34,9 @@ public class ComparatorsTests {
         users.add(user2);
         users.add(user3);
         users.add(user4);
-    }
+    }*/
 
-    @Test
+    /*@Test
     public void scienceDegreeComparatorTest() {
         User user1 = new User(new Address("Polska", "Bialystok", "Sikorskiego", 10), "Antoni");
         User user2 = new User(new Address("Polska", "Bialystok", "Wroclawska", 10), "Antoni");
@@ -55,9 +55,9 @@ public class ComparatorsTests {
         sortedUsers.add(user2);
         users.sort(new UserNameComparatorScientistsFavoured());
         assertEquals(sortedUsers, users);
-    }
+    }*/
 
-    @Test
+    /*@Test
     public void reversedNameComparatorTest() {
         User user1 = new User(new Address("Polska", "Bialystok", "Sikorskiego", 10), "Antoni");
         User user2 = new User(new Address("Polska", "Bialystok", "Wroclawska", 10), "Antoni");
@@ -76,9 +76,9 @@ public class ComparatorsTests {
         sortedUsers.add(user4);
         users.sort(new ReversedUserNameComparator());
         assertEquals(sortedUsers, users);
-    }
+    }*/
 
-    @Test
+    /*@Test
     public void userNameAndAddressComparatorTest() {
         User user1 = new User(new Address("Polska", "Bialystok", "Sikorskiego", 10), "Antoni");
         User user2 = new User(new Address("Polska", "Bialystok", "Wroclawska", 10), "Antoni");
@@ -97,5 +97,5 @@ public class ComparatorsTests {
         sortedUsers.add(user3);
         users.sort(new UserNameAndAdressComparator());
         assertEquals(sortedUsers, users);
-    }
+    }*/
 }

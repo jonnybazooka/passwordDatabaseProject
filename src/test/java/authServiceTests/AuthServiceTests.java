@@ -9,12 +9,12 @@ import org.sda.user.User;
 import static junit.framework.TestCase.assertTrue;
 
 public class AuthServiceTests {
-    @Test
+    /*@Test
     public void authServiceTest1() {
         User user = new User(null, "Victor");
         user.addPassword("Very Strong Password".toCharArray());
         AuthService authService = new AuthServiceImplementation();
         boolean result = authService.isAuthenticated(user, new SHA256());
         assertTrue(result);
-    }
+    }*/
 }

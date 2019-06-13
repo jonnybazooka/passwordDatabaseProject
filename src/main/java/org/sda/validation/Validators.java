@@ -30,15 +30,19 @@ public class Validators {
 
     public boolean validateEmail(String email) {
         if (!isWithinRange(email, 7, 25)) {
+            System.out.println("Email must be 7-25 characters long.");
             return false;
         }
         if (!containsValidCharacterSet(email, emailLegalCharacters)) {
+            System.out.println("Email can contain only '.', ',', '@', '-' special characters.");
             return false;
         }
         if (!containsOneMonkey(email)) {
+            System.out.println("Email must contain exactly one @.\nIt cannot be one of the first three or last three characters.");
             return false;
         }
         if (containsNeighbouringSpecialCharacters(email)) {
+            System.out.println("Special characters cannot neighbour each other.");
             return false;
         }
         return true;
@@ -125,6 +129,7 @@ public class Validators {
 
     public boolean validateUserName(String name) {
         if (!isWithinRange(name, 5, 15) || isStartingWithANumber(name)) {
+            System.out.println("Name has to be 5-15 characters long and cannot start with a digit.");
             return false;
         }
         return true;

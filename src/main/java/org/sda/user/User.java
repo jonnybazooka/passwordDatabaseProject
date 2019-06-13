@@ -1,5 +1,7 @@
 package org.sda.user;
 
+import org.sda.authentication.hashFunction.HashFunction;
+import org.sda.authentication.hashFunction.SHA256;
 import org.sda.validation.Validators;
 
 import java.io.Console;
@@ -74,13 +76,14 @@ public class User implements Comparable<User>{
     }
 
     public boolean changePassword() {
+        HashFunction hashFunction = new SHA256();
         Console console = System.console();
         Validators validators = new Validators();
         String password1 = new String(console.readPassword("Enter new password: "));
         String password2 = new String(console.readPassword("Confirm new password: "));
         if (validators.doPasswordsMatch(password1, password2) && validators.validatePassword(password1)
                 && validators.validatePassword(password2)) {
-            password = password1;
+            password = hashFunction.hash(password1);
             System.out.println("Password changed successfully.");
             return true;
         } else if (!validators.validatePassword(password1) || !validators.validatePassword(password2)) {
